@@ -179,7 +179,6 @@ Scripts/Settings.sh
 前置条件：已刷 uboot（不死 uboot）
 1. 设备断电 → 按住复位键上电 → **亮起后浏览器访问 192.168.1.1
 2. 在 Web 界面上传 factory.bin → 自动写入并重启
+
 当前已是 OpenWrt 系统的机器：
 - 系统 → 备份/刷写固件 → 上传 sysupgrade.bin（不保留配置）
-#
-[![Stargazers over time]()](https://starchart.cc/VIKINGYFY/OpenWRT-CI)
