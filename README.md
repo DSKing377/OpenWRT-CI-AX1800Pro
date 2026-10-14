@@ -44,8 +44,10 @@ Config——自定义配置
 
 固件信息里的时间为编译开始的时间，方便核对上游源码提交时间。
 
-MEDIATEK系列、QUALCOMMAX系列、ROCKCHIP系列、X86系列。
+只编译IPQ60XX-WIFI的jdcloud_re-cs-01和jdcloud_re-cs-02固件。
 
+源码：https://github.com/LiBwrt/LibWrt.git
+源码：https://github.com/VIKINGYFY/immortalwrt.git
 
 # Tips ! 如果你想在本地进行编译的话 准备以下步骤(针对AX1800Pro)
 
