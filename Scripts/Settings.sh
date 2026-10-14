@@ -51,3 +51,8 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 		echo "qualcommax set up nowifi successfully!"
 	fi
 fi
+echo "CONFIG_PACKAGE_luci-theme-kucat=n" >> ./.config
+
+# BBR 拥塞控制算法(终端侧)
+echo "CONFIG_PACKAGE_kmod-tcp-bbr=y" >> ./.config
+echo "CONFIG_DEFAULT_tcp_bbr=y" >> ./.config
