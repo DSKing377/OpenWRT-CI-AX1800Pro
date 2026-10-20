@@ -73,6 +73,8 @@ UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
 UPDATE_PACKAGE "qbittorrent" "sbwml/luci-app-qbittorrent" "master" "" "qt6base qt6tools rblibtorrent"
 UPDATE_PACKAGE "quickfile" "sbwml/luci-app-quickfile" "main"
 
+UPDATE_PACKAGE "adblock-fast" "mossdef-org/adblock-fast" "main"
+UPDATE_PACKAGE "luci-app-adblock-fast" "mossdef-org/luci-app-adblock-fast" "main"
 UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "netspeedtest" "sirpdboy/netspeedtest" "main" "" "homebox ookla-speedtest"
 UPDATE_PACKAGE "netwizard" "sirpdboy/luci-app-netwizard" "main"
