@@ -205,6 +205,22 @@ jobs:
           echo "===== 4. Package definitions ====="
           grep -R -nE '^(define Package/(adblock-fast|luci-app-adblock-fast)|CONFIG_PACKAGE_(adblock-fast|luci-app-adblock-fast))' \
             package/adblock-fast package/luci-app-adblock-fast 2>/dev/null || true
+          echo "===== LuCI Makefile ====="
+          sed -n '1,180p' package/luci-app-adblock-fast/Makefile
+
+          echo "===== Backend Makefile ====="
+          sed -n '1,100p' package/adblock-fast/Makefile
+
+          echo "===== Kconfig symbols ====="
+          grep -nE 'adblock-fast|ADBLOCK' tmp/.config-package.in tmp/.config-package.in.tmp 2>/dev/null || true
+
+          echo "===== Config after defconfig ====="
+          grep -n 'adblock-fast' .config || true
+
+          echo "===== Package metadata ====="
+          grep -nE 'PKG_NAME|LUCI_TITLE|LUCI_DEPENDS|DEPENDS' \
+            package/luci-app-adblock-fast/Makefile \
+            package/adblock-fast/Makefile
 
       - name: Download Packages
         if: ${{ !inputs.WRT_TEST }}
