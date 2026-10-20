@@ -82,6 +82,7 @@ UPDATE_PACKAGE "netspeedtest" "sirpdboy/netspeedtest" "main" "" "homebox ookla-s
 UPDATE_PACKAGE "netwizard" "sirpdboy/luci-app-netwizard" "main"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
 UPDATE_PACKAGE "timecontrol" "sirpdboy/luci-app-timecontrol" "main"
+UPDATE_PACKAGE "parentcontrol" "sirpdboy/luci-app-parentcontrol" "main"
 
 UPDATE_PACKAGE "natmapt" "muink/openwrt-natmapt" "master"
 UPDATE_PACKAGE "stuntman" "muink/openwrt-stuntman" "master"
