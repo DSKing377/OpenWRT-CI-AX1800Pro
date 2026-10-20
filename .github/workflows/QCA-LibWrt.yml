@@ -44,7 +44,7 @@ jobs:
         BRANCH: [25.12-nss]
 
     #调用公用编译核心WRT-CORE.yml
-    uses: ./.github/workflows/WRT-CORE-test.yml
+    uses: ./.github/workflows/WRT-CORE.yml
     with:
       #编译配置
       WRT_CONFIG: ${{matrix.CONFIG}}
