@@ -2,7 +2,7 @@
 # Copyright (C) 2026 VIKINGYFY
 
 #云编译公用核心
-name: WRT-CORE
+name: WRT-CORE-test
 
 on:
   workflow_call:
@@ -186,6 +186,26 @@ jobs:
 
           make defconfig -j$(nproc) && make clean -j$(nproc)
 
+      - name: Check AdBlock Fast Configuration
+        run: |
+          cd ./wrt/
+
+          echo "===== 1. Package directories ====="
+          ls -ld package/adblock-fast package/luci-app-adblock-fast \
+            feeds/packages/net/adblock-fast \
+            feeds/luci/applications/luci-app-adblock-fast 2>&1 || true
+
+          echo "===== 2. Makefiles ====="
+          find package/adblock-fast package/luci-app-adblock-fast \
+            -maxdepth 1 -name Makefile -print 2>/dev/null
+
+          echo "===== 3. Final .config ====="
+          grep -nE 'CONFIG_PACKAGE_(adblock-fast|luci-app-adblock-fast)=' .config || true
+
+          echo "===== 4. Package definitions ====="
+          grep -R -nE '^(define Package/(adblock-fast|luci-app-adblock-fast)|CONFIG_PACKAGE_(adblock-fast|luci-app-adblock-fast))' \
+            package/adblock-fast package/luci-app-adblock-fast 2>/dev/null || true
+
       - name: Download Packages
         if: ${{ !inputs.WRT_TEST }}
         run: |
@@ -199,6 +219,20 @@ jobs:
           cd ./wrt/
 
           make -j$(nproc) || make -j1 V=s
+
+      - name: Check AdBlock Fast Build Results
+        if: ${{ !inputs.WRT_TEST && always() }}
+        run: |
+          cd ./wrt/
+
+          echo "===== Generated IPK packages ====="
+          find bin/packages -type f \
+            \( -iname '*adblock-fast*.ipk' \
+            -o -iname '*luci-app-adblock-fast*.ipk' \) \
+            -print 2>/dev/null || true
+
+          echo "===== Build logs mentioning AdBlock Fast ====="
+          grep -R -i -n -m 10 'adblock-fast' logs 2>/dev/null | tail -n 50 || true
 
       - name: Save Build Cache
         if: ${{ !inputs.WRT_TEST && success() && steps.cache-restore.outputs.cache-hit != 'true' }}
