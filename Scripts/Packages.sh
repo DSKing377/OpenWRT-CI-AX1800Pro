@@ -99,6 +99,12 @@ UPDATE_PACKAGE "qmodem-generic" "LianXia233/luci-app-qmodem-generic" "main"
 
 rm -rf ./package/packages/luci-app-homeproxy
 
+# 修正 luci-app-adblock-fast 移至 package 目录后的 LuCI 构建文件路径
+if [ -f "./package/luci-app-adblock-fast/Makefile" ]; then
+    sed -i 's|^include ../../luci.mk$|include $(TOPDIR)/feeds/luci/luci.mk|' \
+        ./package/luci-app-adblock-fast/Makefile
+fi
+
 #更新软件包版本
 UPDATE_VERSION() {
 	local PKG_NAME=$1
