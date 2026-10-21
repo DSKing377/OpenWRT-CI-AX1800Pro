@@ -105,6 +105,27 @@ if [ -f "./package/luci-app-adblock-fast/Makefile" ]; then
         ./package/luci-app-adblock-fast/Makefile
 fi
 
+# 修复 luci-app-timecontrol 菜单路径
+echo "===== 修复 luci-app-timecontrol 菜单路径 ====="
+
+FOUND_TIMECONTROL_MENU=0
+
+while IFS= read -r MENU_FILE; do
+    [ -f "$MENU_FILE" ] || continue
+
+    if grep -q 'admin/control/timecontrol' "$MENU_FILE"; then
+        sed -i 's#admin/control/timecontrol#admin/services/timecontrol#g' "$MENU_FILE"
+        echo "已修复菜单文件：$MENU_FILE"
+        FOUND_TIMECONTROL_MENU=1
+    fi
+done <<EOF
+$(find ./package ./feeds -type f -name 'luci-app-timecontrol.json' 2>/dev/null)
+EOF
+
+if [ "$FOUND_TIMECONTROL_MENU" -eq 0 ]; then
+    echo "警告：未找到需要修复的菜单定义，请检查插件源码是否已下载。"
+fi
+
 #更新软件包版本
 UPDATE_VERSION() {
 	local PKG_NAME=$1
